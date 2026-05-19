@@ -65,4 +65,8 @@ const Article = sequelize.define(
         tableName: "articles", //tên bảng trong database, nếu không có trường này, Sequelize sẽ tự động chuyển tên modal thành chữ thường và thêm "s" vào cuối để làm tên bảng (ví dụ: Article -> articles)
     },
 );
+
+// Đồng bộ model với database (tạo bảng nếu chưa có, cập nhật nếu có thay đổi)
+Article.sync({ alter: true });
+
 export default Article;

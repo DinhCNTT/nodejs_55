@@ -5,7 +5,7 @@ import { DATABASE_URL } from "../constant/app.constant.js";
 
 const url = new URL(DATABASE_URL);
 
-console.log(url)
+// console.log(url);
 
 const adapter = new PrismaMariaDb({
     host: url.hostname,
@@ -15,5 +15,12 @@ const adapter = new PrismaMariaDb({
     connectionLimit: 5,
 });
 const prisma = new PrismaClient({ adapter });
+
+try {
+    await prisma.$connect();
+    console.log("[PRISMA] Connection has been established successfully.");
+} catch (error) {
+    console.error("[PRISMA] Unable to connect to the database:", error);
+}
 
 export { prisma };

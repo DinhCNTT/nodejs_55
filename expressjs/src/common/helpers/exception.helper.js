@@ -1,0 +1,42 @@
+import { statusCodes } from "./status-code.help.js";
+//Bad request (400)
+export class BadRequestError extends Error {
+    statusCode = statusCodes.BAD_REQUEST;
+    name = "BadRequestError";
+    constructor(message = "Bad Request Error") {
+        super(message);
+    }
+}
+//Unauthorized (401)
+class UnauthorizedError extends Error {
+    statusCode = statusCodes.UNAUTHORIZED;
+    name = "UnauthorizedError";
+    constructor(message = "Unauthorized Error") {
+        super(message);
+    }
+}
+//Forbidden (403)
+class ForbiddenError extends Error {
+    statusCode = statusCodes.FORBIDDEN;
+    name = "ForbiddenError";
+    constructor(message = "Forbidden Error") {
+        super(message);
+    }
+}
+//Not found (404)
+class NotFoundError extends Error {
+    statusCode = statusCodes.NOT_FOUND;
+    name = "NotFoundError";
+    constructor(message = "Not Found Error") {
+        super(message);
+    }
+}
+//Internal server error (500)
+class InternalServerError extends Error {
+    statusCode = statusCodes.INTERNAL_SERVER_ERROR;
+    name = "InternalServerError";
+    constructor(message = "Internal Server Error") {
+        super(message);
+    }
+}
+

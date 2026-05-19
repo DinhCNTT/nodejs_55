@@ -5,8 +5,24 @@ import { prisma } from "../common/prisma/connect.prisma.js";
 
 export const articleService = {
     async findAll() {
-        const res = await Article.findAll()
+
+        const res = await prisma.articles.findMany();
+
         return res;
     },
+    async create(req) {
+        const body = req.body;
+        console.log({ body });
+        const res = await prisma.articles.create({
+            data: {
+                title: body.title,
+                content: body.content,
+                userId: body.userId,
+            },
+        })
+        return true;
+    },
 };
+
+
 
