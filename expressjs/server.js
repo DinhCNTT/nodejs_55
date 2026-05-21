@@ -1,7 +1,7 @@
 import express from "express";
 import rootRouter from "./src/routers/root.router.js";
 import { appError } from "./src/common/helpers/appError.helper.js";
-
+import cors from "cors";
 const app = express();
 
 //js version cũ: commonjs
@@ -12,6 +12,19 @@ const app = express();
 
 //middleware nhận dữ liệu json từ body
 app.use(express.json()); // nhận dữ liệu json
+//middleware CORS
+// app.use((req, res, next) => {
+//     console.log(req.headers);
+//     res.setHeader("access-control-allow-methods","GET, POST, PATCH, PUT, DELETE");
+//     res.setHeader("access-control-allow-headers","content-type");
+//     res.setHeader("access-control-allow-origin","http://localhost:3000");
+//     next();
+// });
+
+app.use(cors({
+    origin: ["http://localhost:3000", "https://google.com"],
+}));
+
 //định nghĩa api
 app.use("/api", rootRouter);
 

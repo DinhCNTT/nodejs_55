@@ -5,7 +5,7 @@ export const articleController = {
     async findAll(req, res, next) {
         try {
             //gọi service
-            const articles = await articleService.findAll();
+            const articles = await articleService.findAll(req);
 
             const response = responseSuccess(
                 articles,
@@ -25,5 +25,23 @@ export const articleController = {
         );
         res.json(response);
 
+    },
+    async update(req, res, next) {
+        const articles = await articleService.update(req);
+        const response = responseSuccess(
+            articles,
+            "Cập nhật Article thành công",
+        );
+        res.json(response);
+
+    },
+    async delete(req, res, next) {
+        const articles = await articleService.delete(req);
+        const response = responseSuccess(
+            articles,
+            "Xóa Article thành công",
+        );
+        res.json(response);
     }
+
 }

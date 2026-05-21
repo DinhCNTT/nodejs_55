@@ -39,7 +39,7 @@ articleRouter.get(
         // } else {
         //   next();
         // }
-        throw new BadRequestError("Lỗi ở middleware 4");
+        // throw new BadRequestError("Lỗi ở middleware 4");
         next();
     },
 
@@ -47,6 +47,8 @@ articleRouter.get(
 );
 //Create
 articleRouter.post("/", articleController.create);
-
-
+//Update
+articleRouter.put("/:articleId", articleController.update);
+//Delete
+articleRouter.delete("/:articleId", articleController.delete);
 export default articleRouter;
