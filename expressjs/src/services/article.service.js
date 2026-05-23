@@ -2,38 +2,36 @@
 import sequelize from "../common/squelize/connect.sequelize.js";
 import Article from "../models/article.model.js";
 import { prisma } from "../common/prisma/connect.prisma.js";
+import { buildQueryPrismaHelper } from "../common/helpers/build-query-prisma.helper.js";
 
 export const articleService = {
     async findAll(req) {
-        //xử lý phân trang
-        //ví dụ: 10 bài viết trên 1 trang
-        //page = 1: từ 0-9
-        //page = 2: từ 10-19
-        //page = n: từ (n-1)*10 - n*10
-        let { page, pageSize } = req.query;
-        //xử lý chuyển về số nguyên
-        page = Number(page) || 1;
-        pageSize = Number(pageSize) || 3;
-        //xử lý trường hợp số âm
-        if (page < 1) page = 1;
-        if (pageSize < 1) pageSize = 3;
-        //index: vị trí bắt đầu lấy dữ liệu
-        const index = (page - 1) * pageSize;
+        //squelize
+        // const res = await Article.findAll();
+
+        const { page, pageSize, index, where } = buildQueryPrismaHelper(req);
+
         //prisma
         //thay vì viết raw sql thì sử dụng hàm có sẵn của prisma để có thể phân trang
         const res = await prisma.articles.findMany({
-            // tìm tất cả bài viết mà chưa bị xóa (isDeleted = false)
-            where: {
-                isDeleted: false,
-            },
+            // where: {
+            //   content: {
+            //     contains: "Nextjs",
+            //   },
+            //   ...filters, //sử dụng spread operator để gộp các điều kiện filter vào trong điều kiện where
+            //   isDeleted: false,
+            // },
+            where: where,
             skip: index, // tương đương với offset trong sql
             take: pageSize, // tương đương với limit trong sql
         });
         //thông qua .count để đếm số lượng bài viết và điều kiện chưa bị xóa
         const totalItems = await prisma.articles.count({
-            where: {
-                isDeleted: false,
-            },
+            // where: {
+            //   ...filters,
+            //   isDeleted: false,
+            // },
+            where: where,
         });
         //tổng số trang = tổng số bài viết / số bài viết trên 1 trang (làm tròn lên)
         const totalPages = Math.ceil(totalItems / pageSize);

@@ -7,7 +7,7 @@ export const responseSuccess = (data, message = "OK", statusCode = 200) => {
     }
 }
 
-export const responseErr = (message = "Internal Server Error", statusCode = statusCodes.INTERNAL_SERVER_ERROR, stack) => {
+export const responseErr = (message = "Internal Server Error", statusCode = 500, stack) => {
     return {
         status: "error",
         statusCode: statusCode,

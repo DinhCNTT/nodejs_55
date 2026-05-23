@@ -8907,6 +8907,7 @@ export namespace Prisma {
     deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    password: string | null
   }
 
   export type UsersMaxAggregateOutputType = {
@@ -8922,6 +8923,7 @@ export namespace Prisma {
     deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    password: string | null
   }
 
   export type UsersCountAggregateOutputType = {
@@ -8937,6 +8939,7 @@ export namespace Prisma {
     deletedAt: number
     createdAt: number
     updatedAt: number
+    password: number
     _all: number
   }
 
@@ -8966,6 +8969,7 @@ export namespace Prisma {
     deletedAt?: true
     createdAt?: true
     updatedAt?: true
+    password?: true
   }
 
   export type UsersMaxAggregateInputType = {
@@ -8981,6 +8985,7 @@ export namespace Prisma {
     deletedAt?: true
     createdAt?: true
     updatedAt?: true
+    password?: true
   }
 
   export type UsersCountAggregateInputType = {
@@ -8996,6 +9001,7 @@ export namespace Prisma {
     deletedAt?: true
     createdAt?: true
     updatedAt?: true
+    password?: true
     _all?: true
   }
 
@@ -9098,6 +9104,7 @@ export namespace Prisma {
     deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
+    password: string | null
     _count: UsersCountAggregateOutputType | null
     _avg: UsersAvgAggregateOutputType | null
     _sum: UsersSumAggregateOutputType | null
@@ -9132,6 +9139,7 @@ export namespace Prisma {
     deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    password?: boolean
     articles?: boolean | users$articlesArgs<ExtArgs>
     chatgroupmembers?: boolean | users$chatgroupmembersArgs<ExtArgs>
     chatgroups?: boolean | users$chatgroupsArgs<ExtArgs>
@@ -9155,9 +9163,10 @@ export namespace Prisma {
     deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    password?: boolean
   }
 
-  export type usersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "fullName" | "avatar" | "age" | "totpSecret" | "googleId" | "deletedBy" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["users"]>
+  export type usersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "fullName" | "avatar" | "age" | "totpSecret" | "googleId" | "deletedBy" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt" | "password", ExtArgs["result"]["users"]>
   export type usersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     articles?: boolean | users$articlesArgs<ExtArgs>
     chatgroupmembers?: boolean | users$chatgroupmembersArgs<ExtArgs>
@@ -9189,6 +9198,7 @@ export namespace Prisma {
       deletedAt: Date | null
       createdAt: Date
       updatedAt: Date
+      password: string | null
     }, ExtArgs["result"]["users"]>
     composites: {}
   }
@@ -9575,6 +9585,7 @@ export namespace Prisma {
     readonly deletedAt: FieldRef<"users", 'DateTime'>
     readonly createdAt: FieldRef<"users", 'DateTime'>
     readonly updatedAt: FieldRef<"users", 'DateTime'>
+    readonly password: FieldRef<"users", 'String'>
   }
     
 
@@ -10187,7 +10198,8 @@ export namespace Prisma {
     isDeleted: 'isDeleted',
     deletedAt: 'deletedAt',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    password: 'password'
   };
 
   export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
@@ -10245,7 +10257,8 @@ export namespace Prisma {
     fullName: 'fullName',
     avatar: 'avatar',
     totpSecret: 'totpSecret',
-    googleId: 'googleId'
+    googleId: 'googleId',
+    password: 'password'
   };
 
   export type usersOrderByRelevanceFieldEnum = (typeof usersOrderByRelevanceFieldEnum)[keyof typeof usersOrderByRelevanceFieldEnum]
@@ -10840,6 +10853,7 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableFilter<"users"> | Date | string | null
     createdAt?: DateTimeFilter<"users"> | Date | string
     updatedAt?: DateTimeFilter<"users"> | Date | string
+    password?: StringNullableFilter<"users"> | string | null
     articles?: ArticlesListRelationFilter
     chatgroupmembers?: ChatgroupmembersListRelationFilter
     chatgroups?: ChatgroupsListRelationFilter
@@ -10860,6 +10874,7 @@ export namespace Prisma {
     deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    password?: SortOrderInput | SortOrder
     articles?: articlesOrderByRelationAggregateInput
     chatgroupmembers?: chatgroupmembersOrderByRelationAggregateInput
     chatgroups?: chatgroupsOrderByRelationAggregateInput
@@ -10884,6 +10899,7 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableFilter<"users"> | Date | string | null
     createdAt?: DateTimeFilter<"users"> | Date | string
     updatedAt?: DateTimeFilter<"users"> | Date | string
+    password?: StringNullableFilter<"users"> | string | null
     articles?: ArticlesListRelationFilter
     chatgroupmembers?: ChatgroupmembersListRelationFilter
     chatgroups?: ChatgroupsListRelationFilter
@@ -10904,6 +10920,7 @@ export namespace Prisma {
     deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    password?: SortOrderInput | SortOrder
     _count?: usersCountOrderByAggregateInput
     _avg?: usersAvgOrderByAggregateInput
     _max?: usersMaxOrderByAggregateInput
@@ -10927,6 +10944,7 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableWithAggregatesFilter<"users"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"users"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"users"> | Date | string
+    password?: StringNullableWithAggregatesFilter<"users"> | string | null
   }
 
   export type articlesCreateInput = {
@@ -11477,6 +11495,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    password?: string | null
     articles?: articlesCreateNestedManyWithoutUsersInput
     chatgroupmembers?: chatgroupmembersCreateNestedManyWithoutUsersInput
     chatgroups?: chatgroupsCreateNestedManyWithoutUsersInput
@@ -11497,6 +11516,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    password?: string | null
     articles?: articlesUncheckedCreateNestedManyWithoutUsersInput
     chatgroupmembers?: chatgroupmembersUncheckedCreateNestedManyWithoutUsersInput
     chatgroups?: chatgroupsUncheckedCreateNestedManyWithoutUsersInput
@@ -11516,6 +11536,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     articles?: articlesUpdateManyWithoutUsersNestedInput
     chatgroupmembers?: chatgroupmembersUpdateManyWithoutUsersNestedInput
     chatgroups?: chatgroupsUpdateManyWithoutUsersNestedInput
@@ -11536,6 +11557,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     articles?: articlesUncheckedUpdateManyWithoutUsersNestedInput
     chatgroupmembers?: chatgroupmembersUncheckedUpdateManyWithoutUsersNestedInput
     chatgroups?: chatgroupsUncheckedUpdateManyWithoutUsersNestedInput
@@ -11556,6 +11578,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    password?: string | null
   }
 
   export type usersUpdateManyMutationInput = {
@@ -11570,6 +11593,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type usersUncheckedUpdateManyInput = {
@@ -11585,6 +11609,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -12190,6 +12215,7 @@ export namespace Prisma {
     deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    password?: SortOrder
   }
 
   export type usersAvgOrderByAggregateInput = {
@@ -12211,6 +12237,7 @@ export namespace Prisma {
     deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    password?: SortOrder
   }
 
   export type usersMinOrderByAggregateInput = {
@@ -12226,6 +12253,7 @@ export namespace Prisma {
     deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    password?: SortOrder
   }
 
   export type usersSumOrderByAggregateInput = {
@@ -12969,6 +12997,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    password?: string | null
     chatgroupmembers?: chatgroupmembersCreateNestedManyWithoutUsersInput
     chatgroups?: chatgroupsCreateNestedManyWithoutUsersInput
     chatmessages?: chatmessagesCreateNestedManyWithoutUsersInput
@@ -12988,6 +13017,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    password?: string | null
     chatgroupmembers?: chatgroupmembersUncheckedCreateNestedManyWithoutUsersInput
     chatgroups?: chatgroupsUncheckedCreateNestedManyWithoutUsersInput
     chatmessages?: chatmessagesUncheckedCreateNestedManyWithoutUsersInput
@@ -13022,6 +13052,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     chatgroupmembers?: chatgroupmembersUpdateManyWithoutUsersNestedInput
     chatgroups?: chatgroupsUpdateManyWithoutUsersNestedInput
     chatmessages?: chatmessagesUpdateManyWithoutUsersNestedInput
@@ -13041,6 +13072,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     chatgroupmembers?: chatgroupmembersUncheckedUpdateManyWithoutUsersNestedInput
     chatgroups?: chatgroupsUncheckedUpdateManyWithoutUsersNestedInput
     chatmessages?: chatmessagesUncheckedUpdateManyWithoutUsersNestedInput
@@ -13059,6 +13091,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    password?: string | null
     articles?: articlesCreateNestedManyWithoutUsersInput
     chatgroups?: chatgroupsCreateNestedManyWithoutUsersInput
     chatmessages?: chatmessagesCreateNestedManyWithoutUsersInput
@@ -13078,6 +13111,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    password?: string | null
     articles?: articlesUncheckedCreateNestedManyWithoutUsersInput
     chatgroups?: chatgroupsUncheckedCreateNestedManyWithoutUsersInput
     chatmessages?: chatmessagesUncheckedCreateNestedManyWithoutUsersInput
@@ -13140,6 +13174,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     articles?: articlesUpdateManyWithoutUsersNestedInput
     chatgroups?: chatgroupsUpdateManyWithoutUsersNestedInput
     chatmessages?: chatmessagesUpdateManyWithoutUsersNestedInput
@@ -13159,6 +13194,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     articles?: articlesUncheckedUpdateManyWithoutUsersNestedInput
     chatgroups?: chatgroupsUncheckedUpdateManyWithoutUsersNestedInput
     chatmessages?: chatmessagesUncheckedUpdateManyWithoutUsersNestedInput
@@ -13240,6 +13276,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    password?: string | null
     articles?: articlesCreateNestedManyWithoutUsersInput
     chatgroupmembers?: chatgroupmembersCreateNestedManyWithoutUsersInput
     chatmessages?: chatmessagesCreateNestedManyWithoutUsersInput
@@ -13259,6 +13296,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    password?: string | null
     articles?: articlesUncheckedCreateNestedManyWithoutUsersInput
     chatgroupmembers?: chatgroupmembersUncheckedCreateNestedManyWithoutUsersInput
     chatmessages?: chatmessagesUncheckedCreateNestedManyWithoutUsersInput
@@ -13354,6 +13392,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     articles?: articlesUpdateManyWithoutUsersNestedInput
     chatgroupmembers?: chatgroupmembersUpdateManyWithoutUsersNestedInput
     chatmessages?: chatmessagesUpdateManyWithoutUsersNestedInput
@@ -13373,6 +13412,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     articles?: articlesUncheckedUpdateManyWithoutUsersNestedInput
     chatgroupmembers?: chatgroupmembersUncheckedUpdateManyWithoutUsersNestedInput
     chatmessages?: chatmessagesUncheckedUpdateManyWithoutUsersNestedInput
@@ -13450,6 +13490,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    password?: string | null
     articles?: articlesCreateNestedManyWithoutUsersInput
     chatgroupmembers?: chatgroupmembersCreateNestedManyWithoutUsersInput
     chatgroups?: chatgroupsCreateNestedManyWithoutUsersInput
@@ -13469,6 +13510,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    password?: string | null
     articles?: articlesUncheckedCreateNestedManyWithoutUsersInput
     chatgroupmembers?: chatgroupmembersUncheckedCreateNestedManyWithoutUsersInput
     chatgroups?: chatgroupsUncheckedCreateNestedManyWithoutUsersInput
@@ -13537,6 +13579,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     articles?: articlesUpdateManyWithoutUsersNestedInput
     chatgroupmembers?: chatgroupmembersUpdateManyWithoutUsersNestedInput
     chatgroups?: chatgroupsUpdateManyWithoutUsersNestedInput
@@ -13556,6 +13599,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     articles?: articlesUncheckedUpdateManyWithoutUsersNestedInput
     chatgroupmembers?: chatgroupmembersUncheckedUpdateManyWithoutUsersNestedInput
     chatgroups?: chatgroupsUncheckedUpdateManyWithoutUsersNestedInput
@@ -13633,6 +13677,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    password?: string | null
     articles?: articlesCreateNestedManyWithoutUsersInput
     chatgroupmembers?: chatgroupmembersCreateNestedManyWithoutUsersInput
     chatgroups?: chatgroupsCreateNestedManyWithoutUsersInput
@@ -13652,6 +13697,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    password?: string | null
     articles?: articlesUncheckedCreateNestedManyWithoutUsersInput
     chatgroupmembers?: chatgroupmembersUncheckedCreateNestedManyWithoutUsersInput
     chatgroups?: chatgroupsUncheckedCreateNestedManyWithoutUsersInput
@@ -13712,6 +13758,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     articles?: articlesUpdateManyWithoutUsersNestedInput
     chatgroupmembers?: chatgroupmembersUpdateManyWithoutUsersNestedInput
     chatgroups?: chatgroupsUpdateManyWithoutUsersNestedInput
@@ -13731,6 +13778,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     articles?: articlesUncheckedUpdateManyWithoutUsersNestedInput
     chatgroupmembers?: chatgroupmembersUncheckedUpdateManyWithoutUsersNestedInput
     chatgroups?: chatgroupsUncheckedUpdateManyWithoutUsersNestedInput
