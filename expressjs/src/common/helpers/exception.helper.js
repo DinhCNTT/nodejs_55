@@ -8,7 +8,7 @@ export class BadRequestError extends Error {
     }
 }
 //Unauthorized (401)
-class UnauthorizedError extends Error {
+export class UnauthorizedError extends Error {
     statusCode = statusCodes.UNAUTHORIZED;
     name = "UnauthorizedError";
     constructor(message = "Unauthorized Error") {
@@ -16,7 +16,7 @@ class UnauthorizedError extends Error {
     }
 }
 //Forbidden (403)
-class ForbiddenError extends Error {
+export class ForbiddenError extends Error {
     statusCode = statusCodes.FORBIDDEN;
     name = "ForbiddenError";
     constructor(message = "Forbidden Error") {
@@ -24,7 +24,7 @@ class ForbiddenError extends Error {
     }
 }
 //Not found (404)
-class NotFoundError extends Error {
+export class NotFoundError extends Error {
     statusCode = statusCodes.NOT_FOUND;
     name = "NotFoundError";
     constructor(message = "Not Found Error") {
@@ -32,7 +32,7 @@ class NotFoundError extends Error {
     }
 }
 //Internal server error (500)
-class InternalServerError extends Error {
+export class InternalServerError extends Error {
     statusCode = statusCodes.INTERNAL_SERVER_ERROR;
     name = "InternalServerError";
     constructor(message = "Internal Server Error") {

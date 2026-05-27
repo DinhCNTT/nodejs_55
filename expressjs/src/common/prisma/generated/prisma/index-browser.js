@@ -212,7 +212,8 @@ exports.Prisma.UsersScalarFieldEnum = {
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  password: 'password'
+  password: 'password',
+  codeChangePass: 'codeChangePass'
 };
 
 exports.Prisma.SortOrder = {
@@ -250,7 +251,8 @@ exports.Prisma.usersOrderByRelevanceFieldEnum = {
   avatar: 'avatar',
   totpSecret: 'totpSecret',
   googleId: 'googleId',
-  password: 'password'
+  password: 'password',
+  codeChangePass: 'codeChangePass'
 };
 
 

@@ -124,6 +124,7 @@ model users {
   createdAt        DateTime           @default(now()) @db.Timestamp(0)
   updatedAt        DateTime           @default(now()) @db.Timestamp(0)
   password         String?            @db.VarChar(255)
+  codeChangePass   String?            @db.VarChar(255)
   articles         articles[]
   chatgroupmembers chatgroupmembers[]
   chatgroups       chatgroups[]

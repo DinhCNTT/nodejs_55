@@ -2,6 +2,7 @@ import express from "express";
 import { articleController } from "../controllers/article.controller.js";
 import { responseErr } from "../common/helpers/response.helper.js";
 import { BadRequestError } from "../common/helpers/exception.helper.js";
+import { authMiddleware } from "../common/middleware/auth.middleware.js";
 const articleRouter = express.Router();
 
 //req, res: sẽ sử dụng chung vùng nhớ, nên có thể truyền dữ liệu qua lại giữa các middleware thông qua req hoặc res
@@ -10,6 +11,8 @@ const articleRouter = express.Router();
 //Read
 articleRouter.get(
     "/",
+    //thêm middleware authMiddleware để kiểm tra token
+    authMiddleware,
     (req, res, next) => {
         console.log("middleware 1");
         // xử lý logic -> A
@@ -44,6 +47,7 @@ articleRouter.get(
     },
 
     articleController.findAll,
+
 );
 //Create
 articleRouter.post("/", articleController.create);
