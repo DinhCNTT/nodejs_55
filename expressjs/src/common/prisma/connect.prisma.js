@@ -14,7 +14,9 @@ const adapter = new PrismaMariaDb({
     database: url.pathname.substring(1),
     connectionLimit: 5,
 });
-const prisma = new PrismaClient({ adapter });
+const prisma = new PrismaClient({
+    adapter
+});
 
 try {
     await prisma.$connect();

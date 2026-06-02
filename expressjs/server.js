@@ -2,6 +2,8 @@ import express from "express";
 import rootRouter from "./src/routers/root.router.js";
 import { appError } from "./src/common/helpers/appError.helper.js";
 import cors from "cors";
+import { logAPI } from "./src/common/middleware/log-api.middleware.js";
+import cookieParser from "cookie-parser";
 const app = express();
 
 //js version cũ: commonjs
@@ -25,6 +27,9 @@ app.use(cors({
     origin: ["http://localhost:3000", "https://google.com"],
 }));
 
+app.use(cookieParser());
+
+app.use(logAPI);
 //định nghĩa api
 app.use("/api", rootRouter);
 

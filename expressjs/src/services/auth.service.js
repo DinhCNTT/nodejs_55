@@ -2,7 +2,7 @@ import { prisma } from "../common/prisma/connect.prisma.js";
 import { BadRequestError } from "../common/helpers/exception.helper.js";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
-import { signAccessToken, signRefreshToken } from "../common/helpers/jwt.helper.js";
+import { signAccessToken, signRefreshToken, verifyRefreshToken, verifyAccessToken } from "../common/helpers/jwt.helper.js";
 
 export const authService = {
     async login(req) {
@@ -20,6 +20,14 @@ export const authService = {
 
         if (!existingUser) {
             throw new BadRequestError(`Người dùng không tồn tại, vui lòng đăng ký`);
+        }
+
+        if (!password) {
+            throw new BadRequestError(`Vui lòng nhập mật khẩu để đăng nhập`);
+        }
+
+        if (!existingUser.password) {
+            throw new BadRequestError(`Tài khoản chưa được thiết lập mật khẩu.`);
         }
 
         const isPasswordValid = bcrypt.compareSync(password, existingUser.password); //true
@@ -98,5 +106,59 @@ export const authService = {
             },
         });
         return changePassCode;
-    }
+    },
+    async getInfo(req) {
+        return req.user;
+    },
+    async refreshToken(req) {
+        const { refreshToken } = req.cookies;
+        const accessToken = req.accessToken;
+        console.log('accessToken', accessToken);
+        console.log('refreshToken', refreshToken);
+
+        if (!refreshToken) {
+            throw new BadRequestError(`Không có refresh token, vui lòng đăng nhập lại`);
+        }
+
+        if (!accessToken) {
+            throw new BadRequestError(`Không có access token, vui lòng đăng nhập lại`);
+        }
+
+        const decodedAccessToken = verifyAccessToken(accessToken, {
+            ignoreExpiration: true
+        });
+        const decodedRefreshToken = verifyRefreshToken(refreshToken, {
+            ignoreExpiration: true
+        });
+        console.log('decodedAccessToken', decodedAccessToken);
+        console.log('decodedRefreshToken', decodedRefreshToken);
+
+        if (decodedAccessToken.userId !== decodedRefreshToken.userId) {
+            throw new BadRequestError(`Thông tin người dùng không đúng, vui lòng thử lại`);
+        }
+
+        const userExists = await prisma.users.findUnique({
+            where: {
+                id: decodedRefreshToken.userId,
+            },
+        });
+
+        if (!userExists) {
+            throw new BadRequestError(`Người dùng không tồn tại, vui lòng đăng nhập lại`);
+        }
+
+        const payload = {
+            userId: userExists.id,
+            email: userExists.email,
+        };
+
+        const newAccessToken = signAccessToken(payload);
+        const newRefreshToken = signRefreshToken(payload);
+
+        return {
+            accessToken: newAccessToken,
+            refreshToken: newRefreshToken,
+        };
+    },
+
 };

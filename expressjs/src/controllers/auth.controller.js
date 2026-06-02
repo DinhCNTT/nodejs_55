@@ -16,7 +16,7 @@ export const authController = {
         res.cookie("refreshToken", refreshToken, COOKIE_OPTIONS);
         const response = responseSuccess({
             accessToken,
-            refreshToken
+            // refreshToken
         }, `Login successfully`);
         res.status(response.statusCode).json(response);
     },
@@ -36,5 +36,24 @@ export const authController = {
     //api 2 change-password
     //in-put: email, mã change password, password mới
     //out-put: password mới
+    async getInfo(req, res, next) {
+        console.log("req.user", req.user);
+        const result = await authService.getInfo(req);
+        const response = responseSuccess(result, `Get info successfully`);
+        res.status(response.statusCode).json(response);
+    },
+    async refreshToken(req, res, next) {
+        const { accessToken, refreshToken } = await authService.refreshToken(req);
+        // lưu refresh token vào cookie
+        res.cookie("refreshToken", refreshToken, COOKIE_OPTIONS);
+        const response = responseSuccess(
+            {
+                accessToken,
+                // refreshToken
+            },
+            `Refresh token successfully`
+        );
+        res.status(response.statusCode).json(response);
+    },
 
 };
