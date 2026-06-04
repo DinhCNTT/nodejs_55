@@ -112,34 +112,32 @@ export const authService = {
     },
     async refreshToken(req) {
         const { refreshToken } = req.cookies;
-        const accessToken = req.accessToken;
-        console.log('accessToken', accessToken);
-        console.log('refreshToken', refreshToken);
+        const accessToken = req.accessToken || req.cookies.accessToken;
 
         if (!refreshToken) {
-            throw new BadRequestError(`Không có refresh token, vui lòng đăng nhập lại`);
+            throw new BadRequestError(
+                "Refresh token không tồn tại, vui lòng đăng nhập lại",
+            );
         }
 
         if (!accessToken) {
-            throw new BadRequestError(`Không có access token, vui lòng đăng nhập lại`);
+            throw new BadRequestError(
+                "Access token không tồn tại, vui lòng đăng nhập lại",
+            );
         }
 
-        const decodedAccessToken = verifyAccessToken(accessToken, {
-            ignoreExpiration: true
+        const decodeAccessToken = verifyAccessToken(accessToken, {
+            ignoreExpiration: true,
         });
-        const decodedRefreshToken = verifyRefreshToken(refreshToken, {
-            ignoreExpiration: true
-        });
-        console.log('decodedAccessToken', decodedAccessToken);
-        console.log('decodedRefreshToken', decodedRefreshToken);
+        const decodeRefreshToken = verifyRefreshToken(refreshToken);
 
-        if (decodedAccessToken.userId !== decodedRefreshToken.userId) {
-            throw new BadRequestError(`Thông tin người dùng không đúng, vui lòng thử lại`);
+        if (decodeAccessToken.userId !== decodeRefreshToken.userId) {
+            throw new BadRequestError("Token không hợp lệ, vui lòng đăng nhập lại");
         }
 
         const userExists = await prisma.users.findUnique({
             where: {
-                id: decodedRefreshToken.userId,
+                id: decodeRefreshToken.userId,
             },
         });
 
@@ -159,6 +157,5 @@ export const authService = {
             accessToken: newAccessToken,
             refreshToken: newRefreshToken,
         };
-    },
-
+    }
 };

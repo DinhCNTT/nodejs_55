@@ -1,9 +1,11 @@
+import "dotenv/config";
 import express from "express";
 import rootRouter from "./src/routers/root.router.js";
 import { appError } from "./src/common/helpers/appError.helper.js";
 import cors from "cors";
 import { logAPI } from "./src/common/middleware/log-api.middleware.js";
 import cookieParser from "cookie-parser";
+import { initLoginGooglePassport } from "./src/common/passport/login-google.passport.js";
 const app = express();
 
 //js version cũ: commonjs
@@ -25,9 +27,12 @@ app.use(express.json()); // nhận dữ liệu json
 
 app.use(cors({
     origin: ["http://localhost:3000", "https://google.com"],
+    credentials: true,
 }));
 
 app.use(cookieParser());
+
+initLoginGooglePassport();
 
 app.use(logAPI);
 //định nghĩa api
