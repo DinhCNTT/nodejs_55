@@ -1,11 +1,17 @@
-import express from 'express';
-import { userController } from '../controllers/user.controller.js';
-import multer from 'multer';
+import express from "express";
+import { userController } from "../controllers/user.controller.js";
+import { uploadDiskStorage } from "../common/multer/disk-storage.multer.js";
+import { uploadMemoryStorage } from "../common/multer/memory-storage.multer.js";
+import { authCookie } from "../common/middleware/authCookie.middleware.js";
+
 const userRouter = express.Router();
-const upload = multer({ dest: 'images/' })
+
 // Tạo route CRUD
-userRouter.post('/avatar-local', upload.single('avatar'), userController.avatarLocal);
-userRouter.post('/avatar-cloud', userController.avatarCloud);
-
-
+userRouter.post(
+  "/avatar-local",
+  authCookie,
+  uploadDiskStorage.single("avatar"),
+  userController.avatarLocal,
+);
+userRouter.post("/avatar-cloud", authCookie, uploadMemoryStorage.single("avatar"), userController.avatarCloud);
 export default userRouter;
