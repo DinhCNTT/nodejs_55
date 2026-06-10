@@ -1,4 +1,3 @@
-import "dotenv/config";
 import express from "express";
 import rootRouter from "./src/routers/root.router.js";
 import { appError } from "./src/common/helpers/appError.helper.js";
@@ -8,6 +7,7 @@ import cookieParser from "cookie-parser";
 import { initLoginGooglePassport } from "./src/common/passport/login-google.passport.js";
 import swaggerUi from "swagger-ui-express";
 import { swaggerDocument } from "./src/common/swagger/init.swagger.js";
+import { initSocket } from "./src/common/socket/init.socket.js";
 
 const app = express();
 
@@ -16,44 +16,50 @@ const app = express();
 
 //js version mới: es module, es6 .mjs
 // import express from "express"
+app.use(express.json()); //middleware để parse body của request có định dạng json
 
-//middleware nhận dữ liệu json từ body
-app.use(express.json()); // nhận dữ liệu json
-//middleware CORS
 // app.use((req, res, next) => {
-//     console.log(req.headers);
-//     res.setHeader("access-control-allow-methods","GET, POST, PATCH, PUT, DELETE");
-//     res.setHeader("access-control-allow-headers","content-type");
-//     res.setHeader("access-control-allow-origin","http://localhost:3000");
-//     next();
+//   console.log(req.headers);
+
+//  gọi res.setHeader() để thiết lập các header cần thiết cho response, ví dụ như header để cho phép truy cập từ client ở domain khác (CORS)
+//   res.setHeader("access-control-allow-methods", "GET, POST, PUT, DELETE");
+//   res.setHeader("access-control-allow-headers", "content-type");
+//   res.setHeader("access-control-allow-origin", "http://localhost:3000");
+
+//   next();
 // });
+// app.use(cors({ origin: "*" })); //cho phép truy cập từ mọi domain
+app.use(cors({ origin: ["http://localhost:3000", "http://google.com"] })); //middleware để thiết lập CORS, cho phép truy cập từ client ở domain http://localhost:3000
 
-app.use(cors({
-    origin: ["http://localhost:3000", "https://google.com"],
-    credentials: true,
-}));
-
-app.use(cookieParser());
-
-initLoginGooglePassport();
-
-app.use(express.static("public"));
+app.use(cookieParser()); //middleware để parse cookie từ request
 
 app.use(logAPI);
 
+initLoginGooglePassport(); //khởi tạo passport login google
+
+//middleware dùng để public thư mục, cho phép client truy cập trực tiếp vào thư mục cho phép để lấy ảnh
+app.use(express.static("public"));
+
 //swagger
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //định nghĩa api
 app.use("/api", rootRouter);
 
 app.use(appError);
 
+const httpServer = initSocket(app);
+
 const PORT = 3069;
-app.listen(PORT, () => {
+const server = httpServer.listen(PORT, () => {
     //sau khi server chạy, sẽ tiếp tục thực các logic code bên trong callback
     console.log(`server online at port: ${PORT}`);
 });
+server.requestTimeout = 0;
+
+//sever node trên mỗi sever đã set up time out mặc định là 30s, nếu sau 30s
+// không có sự tương tác thì server sẽ tự động đóng kết nối, do đó với client
+// không xử lý kịp
 
 //express < 5: controller bắt buộc bọc try catch để xử lý lỗi, nếu không sẽ bị treo server khi có lỗi xảy ra
 

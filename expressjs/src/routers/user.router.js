@@ -5,6 +5,8 @@ import { uploadMemoryStorage } from "../common/multer/memory-storage.multer.js";
 import { authCookie } from "../common/middleware/authCookie.middleware.js";
 
 const userRouter = express.Router();
+userRouter.get("/", userController.findAll);
+userRouter.get("/:id", userController.findOne);
 
 // Tạo route CRUD
 userRouter.post(
