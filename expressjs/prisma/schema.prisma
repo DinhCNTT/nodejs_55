@@ -24,7 +24,7 @@ model articles {
   @@index([userId], map: "userId")
 }
 
-model chatgroupmembers {
+model chatGroupMembers {
   id          Int         @id @default(autoincrement())
   userId      Int?
   chatGroupId Int?
@@ -33,14 +33,15 @@ model chatgroupmembers {
   deletedAt   DateTime?   @db.Timestamp(0)
   createdAt   DateTime    @default(now()) @db.Timestamp(0)
   updatedAt   DateTime    @default(now()) @db.Timestamp(0)
-  users       users?      @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "chatgroupmembers_ibfk_1")
-  chatgroups  chatgroups? @relation(fields: [chatGroupId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "chatgroupmembers_ibfk_2")
+  Users       users?      @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "chatgroupmembers_ibfk_1")
+  chatGroups  chatGroups? @relation(fields: [chatGroupId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "chatgroupmembers_ibfk_2")
 
   @@index([chatGroupId], map: "chatGroupId")
   @@index([userId], map: "userId")
+  @@map("chatgroupmembers")
 }
 
-model chatgroups {
+model chatGroups {
   id               Int                @id @default(autoincrement())
   name             String?            @db.VarChar(255)
   ownerId          Int?
@@ -49,14 +50,15 @@ model chatgroups {
   deletedAt        DateTime?          @db.Timestamp(0)
   createdAt        DateTime           @default(now()) @db.Timestamp(0)
   updatedAt        DateTime           @default(now()) @db.Timestamp(0)
-  chatgroupmembers chatgroupmembers[]
+  ChatGroupMembers chatGroupMembers[]
   users            users?             @relation(fields: [ownerId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "chatgroups_ibfk_1")
-  chatmessages     chatmessages[]
+  chatMessages     chatMessages[]
 
   @@index([ownerId], map: "ownerId")
+  @@map("chatgroups")
 }
 
-model chatmessages {
+model chatMessages {
   id           Int         @id @default(autoincrement())
   chatGroupId  Int?
   userIdSender Int?
@@ -66,11 +68,12 @@ model chatmessages {
   deletedAt    DateTime?   @db.Timestamp(0)
   createdAt    DateTime    @default(now()) @db.Timestamp(0)
   updatedAt    DateTime    @default(now()) @db.Timestamp(0)
-  chatgroups   chatgroups? @relation(fields: [chatGroupId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "chatmessages_ibfk_1")
+  chatGroups   chatGroups? @relation(fields: [chatGroupId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "chatmessages_ibfk_1")
   users        users?      @relation(fields: [userIdSender], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "chatmessages_ibfk_2")
 
   @@index([chatGroupId], map: "chatGroupId")
   @@index([userIdSender], map: "userIdSender")
+  @@map("chatmessages")
 }
 
 model foods {
@@ -115,6 +118,7 @@ model users {
   email            String             @unique(map: "email") @db.VarChar(255)
   fullName         String?            @db.VarChar(255)
   avatar           String?            @db.Text
+  isEmailVerified  Boolean            @default(false)
   age              Int?
   totpSecret       String?            @db.VarChar(255)
   googleId         String?            @db.VarChar(255)
@@ -126,8 +130,8 @@ model users {
   password         String?            @db.VarChar(255)
   codeChangePass   String?            @db.VarChar(255)
   articles         articles[]
-  chatgroupmembers chatgroupmembers[]
-  chatgroups       chatgroups[]
-  chatmessages     chatmessages[]
+  chatGroupMembers chatGroupMembers[]
+  chatGroups       chatGroups[]
+  chatMessages     chatMessages[]
   orders           orders[]
 }

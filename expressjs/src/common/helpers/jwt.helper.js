@@ -13,7 +13,7 @@ import jwt from "jsonwebtoken";
 import { JWT_REFRESH_SECRET, JWT_SECRET } from "../constant/app.constant.js";
 
 export const signAccessToken = (payload) => {
-    return jwt.sign(payload, JWT_SECRET, { expiresIn: "15s" });
+    return jwt.sign(payload, JWT_SECRET, { expiresIn: "3h" });
 };
 
 export const verifyAccessToken = (token, options) => {

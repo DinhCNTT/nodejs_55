@@ -134,7 +134,7 @@ exports.Prisma.ArticlesScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.ChatgroupmembersScalarFieldEnum = {
+exports.Prisma.ChatGroupMembersScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   chatGroupId: 'chatGroupId',
@@ -145,7 +145,7 @@ exports.Prisma.ChatgroupmembersScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.ChatgroupsScalarFieldEnum = {
+exports.Prisma.ChatGroupsScalarFieldEnum = {
   id: 'id',
   name: 'name',
   ownerId: 'ownerId',
@@ -156,7 +156,7 @@ exports.Prisma.ChatgroupsScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.ChatmessagesScalarFieldEnum = {
+exports.Prisma.ChatMessagesScalarFieldEnum = {
   id: 'id',
   chatGroupId: 'chatGroupId',
   userIdSender: 'userIdSender',
@@ -204,6 +204,7 @@ exports.Prisma.UsersScalarFieldEnum = {
   email: 'email',
   fullName: 'fullName',
   avatar: 'avatar',
+  isEmailVerified: 'isEmailVerified',
   age: 'age',
   totpSecret: 'totpSecret',
   googleId: 'googleId',
@@ -232,11 +233,11 @@ exports.Prisma.articlesOrderByRelevanceFieldEnum = {
   imageUrl: 'imageUrl'
 };
 
-exports.Prisma.chatgroupsOrderByRelevanceFieldEnum = {
+exports.Prisma.chatGroupsOrderByRelevanceFieldEnum = {
   name: 'name'
 };
 
-exports.Prisma.chatmessagesOrderByRelevanceFieldEnum = {
+exports.Prisma.chatMessagesOrderByRelevanceFieldEnum = {
   messageText: 'messageText'
 };
 
@@ -258,9 +259,9 @@ exports.Prisma.usersOrderByRelevanceFieldEnum = {
 
 exports.Prisma.ModelName = {
   articles: 'articles',
-  chatgroupmembers: 'chatgroupmembers',
-  chatgroups: 'chatgroups',
-  chatmessages: 'chatmessages',
+  chatGroupMembers: 'chatGroupMembers',
+  chatGroups: 'chatGroups',
+  chatMessages: 'chatMessages',
   foods: 'foods',
   orders: 'orders',
   table_template: 'table_template',
