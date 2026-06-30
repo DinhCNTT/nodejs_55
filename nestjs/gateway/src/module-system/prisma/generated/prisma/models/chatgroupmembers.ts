@@ -252,7 +252,7 @@ export type chatgroupmembersWhereInput = {
   deletedAt?: Prisma.DateTimeNullableFilter<"chatgroupmembers"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"chatgroupmembers"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"chatgroupmembers"> | Date | string
-  users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.usersWhereInput> | null
+  users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.UsersWhereInput> | null
   chatgroups?: Prisma.XOR<Prisma.ChatgroupsNullableScalarRelationFilter, Prisma.chatgroupsWhereInput> | null
 }
 
@@ -265,7 +265,7 @@ export type chatgroupmembersOrderByWithRelationInput = {
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  users?: Prisma.usersOrderByWithRelationInput
+  users?: Prisma.UsersOrderByWithRelationInput
   chatgroups?: Prisma.chatgroupsOrderByWithRelationInput
 }
 
@@ -281,7 +281,7 @@ export type chatgroupmembersWhereUniqueInput = Prisma.AtLeast<{
   deletedAt?: Prisma.DateTimeNullableFilter<"chatgroupmembers"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"chatgroupmembers"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"chatgroupmembers"> | Date | string
-  users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.usersWhereInput> | null
+  users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.UsersWhereInput> | null
   chatgroups?: Prisma.XOR<Prisma.ChatgroupsNullableScalarRelationFilter, Prisma.chatgroupsWhereInput> | null
 }, "id">
 
@@ -321,7 +321,7 @@ export type chatgroupmembersCreateInput = {
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.usersCreateNestedOneWithoutChatgroupmembersInput
+  users?: Prisma.UsersCreateNestedOneWithoutChatgroupmembersInput
   chatgroups?: Prisma.chatgroupsCreateNestedOneWithoutChatgroupmembersInput
 }
 
@@ -342,7 +342,7 @@ export type chatgroupmembersUpdateInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.usersUpdateOneWithoutChatgroupmembersNestedInput
+  users?: Prisma.UsersUpdateOneWithoutChatgroupmembersNestedInput
   chatgroups?: Prisma.chatgroupsUpdateOneWithoutChatgroupmembersNestedInput
 }
 
@@ -534,7 +534,7 @@ export type chatgroupmembersCreateWithoutChatgroupsInput = {
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.usersCreateNestedOneWithoutChatgroupmembersInput
+  users?: Prisma.UsersCreateNestedOneWithoutChatgroupmembersInput
 }
 
 export type chatgroupmembersUncheckedCreateWithoutChatgroupsInput = {
@@ -648,7 +648,7 @@ export type chatgroupmembersUpdateWithoutChatgroupsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.usersUpdateOneWithoutChatgroupmembersNestedInput
+  users?: Prisma.UsersUpdateOneWithoutChatgroupmembersNestedInput
 }
 
 export type chatgroupmembersUncheckedUpdateWithoutChatgroupsInput = {
@@ -747,7 +747,7 @@ export type chatgroupmembersInclude<ExtArgs extends runtime.Types.Extensions.Int
 export type $chatgroupmembersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "chatgroupmembers"
   objects: {
-    users: Prisma.$usersPayload<ExtArgs> | null
+    users: Prisma.$UsersPayload<ExtArgs> | null
     chatgroups: Prisma.$chatgroupsPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1099,7 +1099,7 @@ readonly fields: chatgroupmembersFieldRefs;
  */
 export interface Prisma__chatgroupmembersClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  users<T extends Prisma.chatgroupmembers$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.chatgroupmembers$usersArgs<ExtArgs>>): Prisma.Prisma__usersClient<runtime.Types.Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  users<T extends Prisma.chatgroupmembers$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.chatgroupmembers$usersArgs<ExtArgs>>): Prisma.Prisma__UsersClient<runtime.Types.Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   chatgroups<T extends Prisma.chatgroupmembers$chatgroupsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.chatgroupmembers$chatgroupsArgs<ExtArgs>>): Prisma.Prisma__chatgroupsClient<runtime.Types.Result.GetResult<Prisma.$chatgroupsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1490,18 +1490,18 @@ export type chatgroupmembersDeleteManyArgs<ExtArgs extends runtime.Types.Extensi
  */
 export type chatgroupmembers$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the users
+   * Select specific fields to fetch from the Users
    */
-  select?: Prisma.usersSelect<ExtArgs> | null
+  select?: Prisma.UsersSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the users
+   * Omit specific fields from the Users
    */
-  omit?: Prisma.usersOmit<ExtArgs> | null
+  omit?: Prisma.UsersOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.usersInclude<ExtArgs> | null
-  where?: Prisma.usersWhereInput
+  include?: Prisma.UsersInclude<ExtArgs> | null
+  where?: Prisma.UsersWhereInput
 }
 
 /**

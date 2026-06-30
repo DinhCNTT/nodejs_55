@@ -58,7 +58,7 @@ export const ModelName = {
   foods: 'foods',
   orders: 'orders',
   table_template: 'table_template',
-  users: 'users'
+  Users: 'Users'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -245,7 +245,7 @@ export const foodsOrderByRelevanceFieldEnum = {
 export type foodsOrderByRelevanceFieldEnum = (typeof foodsOrderByRelevanceFieldEnum)[keyof typeof foodsOrderByRelevanceFieldEnum]
 
 
-export const usersOrderByRelevanceFieldEnum = {
+export const UsersOrderByRelevanceFieldEnum = {
   email: 'email',
   fullName: 'fullName',
   avatar: 'avatar',
@@ -255,5 +255,5 @@ export const usersOrderByRelevanceFieldEnum = {
   codeChangePass: 'codeChangePass'
 } as const
 
-export type usersOrderByRelevanceFieldEnum = (typeof usersOrderByRelevanceFieldEnum)[keyof typeof usersOrderByRelevanceFieldEnum]
+export type UsersOrderByRelevanceFieldEnum = (typeof UsersOrderByRelevanceFieldEnum)[keyof typeof UsersOrderByRelevanceFieldEnum]
 

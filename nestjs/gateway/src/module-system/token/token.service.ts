@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import {
     JWT_REFRESH_SECRET_KEY,
     JWT_SECRET_KEY,
-} from '../../common/constants/app.constant.js';
+} from 'src/common/constants/app.constant';
 import jwt from 'jsonwebtoken';
 @Injectable()
 export class TokenService {
@@ -34,12 +34,16 @@ export class TokenService {
         return refreshToken;
     }
 
-    verifyAccessToken(acccessToken) {
-        const decode = jwt.verify(acccessToken, JWT_SECRET_KEY as string);
+    verifyAccessToken(acccessToken, option?: jwt.VerifyOptions) {
+        const decode = jwt.verify(acccessToken, JWT_SECRET_KEY as string, option);
         return decode;
     }
-    verifyRefreshToken(refreshToken) {
-        const decode = jwt.verify(refreshToken, JWT_REFRESH_SECRET_KEY as string);
+    verifyRefreshToken(refreshToken, option?: jwt.VerifyOptions) {
+        const decode = jwt.verify(
+            refreshToken,
+            JWT_REFRESH_SECRET_KEY as string,
+            option,
+        );
         return decode;
     }
 }

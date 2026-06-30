@@ -276,7 +276,7 @@ export type articlesWhereInput = {
   deletedAt?: Prisma.DateTimeNullableFilter<"articles"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"articles"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"articles"> | Date | string
-  users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.usersWhereInput> | null
+  Users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.UsersWhereInput> | null
 }
 
 export type articlesOrderByWithRelationInput = {
@@ -291,7 +291,7 @@ export type articlesOrderByWithRelationInput = {
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  users?: Prisma.usersOrderByWithRelationInput
+  Users?: Prisma.UsersOrderByWithRelationInput
   _relevance?: Prisma.articlesOrderByRelevanceInput
 }
 
@@ -310,7 +310,7 @@ export type articlesWhereUniqueInput = Prisma.AtLeast<{
   deletedAt?: Prisma.DateTimeNullableFilter<"articles"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"articles"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"articles"> | Date | string
-  users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.usersWhereInput> | null
+  Users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.UsersWhereInput> | null
 }, "id">
 
 export type articlesOrderByWithAggregationInput = {
@@ -359,7 +359,7 @@ export type articlesCreateInput = {
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.usersCreateNestedOneWithoutArticlesInput
+  Users?: Prisma.UsersCreateNestedOneWithoutArticlesInput
 }
 
 export type articlesUncheckedCreateInput = {
@@ -386,7 +386,7 @@ export type articlesUpdateInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.usersUpdateOneWithoutArticlesNestedInput
+  Users?: Prisma.UsersUpdateOneWithoutArticlesNestedInput
 }
 
 export type articlesUncheckedUpdateInput = {
@@ -722,7 +722,7 @@ export type articlesSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  users?: boolean | Prisma.articles$usersArgs<ExtArgs>
+  Users?: boolean | Prisma.articles$UsersArgs<ExtArgs>
 }, ExtArgs["result"]["articles"]>
 
 
@@ -743,13 +743,13 @@ export type articlesSelectScalar = {
 
 export type articlesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "content" | "imageUrl" | "views" | "userId" | "deletedBy" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["articles"]>
 export type articlesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  users?: boolean | Prisma.articles$usersArgs<ExtArgs>
+  Users?: boolean | Prisma.articles$UsersArgs<ExtArgs>
 }
 
 export type $articlesPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "articles"
   objects: {
-    users: Prisma.$usersPayload<ExtArgs> | null
+    Users: Prisma.$UsersPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1103,7 +1103,7 @@ readonly fields: articlesFieldRefs;
  */
 export interface Prisma__articlesClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  users<T extends Prisma.articles$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.articles$usersArgs<ExtArgs>>): Prisma.Prisma__usersClient<runtime.Types.Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  Users<T extends Prisma.articles$UsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.articles$UsersArgs<ExtArgs>>): Prisma.Prisma__UsersClient<runtime.Types.Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1492,22 +1492,22 @@ export type articlesDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
- * articles.users
+ * articles.Users
  */
-export type articles$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type articles$UsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the users
+   * Select specific fields to fetch from the Users
    */
-  select?: Prisma.usersSelect<ExtArgs> | null
+  select?: Prisma.UsersSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the users
+   * Omit specific fields from the Users
    */
-  omit?: Prisma.usersOmit<ExtArgs> | null
+  omit?: Prisma.UsersOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.usersInclude<ExtArgs> | null
-  where?: Prisma.usersWhereInput
+  include?: Prisma.UsersInclude<ExtArgs> | null
+  where?: Prisma.UsersWhereInput
 }
 
 /**

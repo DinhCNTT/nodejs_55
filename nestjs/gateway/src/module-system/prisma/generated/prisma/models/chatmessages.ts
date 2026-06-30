@@ -261,7 +261,7 @@ export type chatmessagesWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"chatmessages"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"chatmessages"> | Date | string
   chatgroups?: Prisma.XOR<Prisma.ChatgroupsNullableScalarRelationFilter, Prisma.chatgroupsWhereInput> | null
-  users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.usersWhereInput> | null
+  users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.UsersWhereInput> | null
 }
 
 export type chatmessagesOrderByWithRelationInput = {
@@ -275,7 +275,7 @@ export type chatmessagesOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   chatgroups?: Prisma.chatgroupsOrderByWithRelationInput
-  users?: Prisma.usersOrderByWithRelationInput
+  users?: Prisma.UsersOrderByWithRelationInput
   _relevance?: Prisma.chatmessagesOrderByRelevanceInput
 }
 
@@ -293,7 +293,7 @@ export type chatmessagesWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"chatmessages"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"chatmessages"> | Date | string
   chatgroups?: Prisma.XOR<Prisma.ChatgroupsNullableScalarRelationFilter, Prisma.chatgroupsWhereInput> | null
-  users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.usersWhereInput> | null
+  users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.UsersWhereInput> | null
 }, "id">
 
 export type chatmessagesOrderByWithAggregationInput = {
@@ -336,7 +336,7 @@ export type chatmessagesCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   chatgroups?: Prisma.chatgroupsCreateNestedOneWithoutChatmessagesInput
-  users?: Prisma.usersCreateNestedOneWithoutChatmessagesInput
+  users?: Prisma.UsersCreateNestedOneWithoutChatmessagesInput
 }
 
 export type chatmessagesUncheckedCreateInput = {
@@ -359,7 +359,7 @@ export type chatmessagesUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chatgroups?: Prisma.chatgroupsUpdateOneWithoutChatmessagesNestedInput
-  users?: Prisma.usersUpdateOneWithoutChatmessagesNestedInput
+  users?: Prisma.UsersUpdateOneWithoutChatmessagesNestedInput
 }
 
 export type chatmessagesUncheckedUpdateInput = {
@@ -564,7 +564,7 @@ export type chatmessagesCreateWithoutChatgroupsInput = {
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.usersCreateNestedOneWithoutChatmessagesInput
+  users?: Prisma.UsersCreateNestedOneWithoutChatmessagesInput
 }
 
 export type chatmessagesUncheckedCreateWithoutChatgroupsInput = {
@@ -684,7 +684,7 @@ export type chatmessagesUpdateWithoutChatgroupsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.usersUpdateOneWithoutChatmessagesNestedInput
+  users?: Prisma.UsersUpdateOneWithoutChatmessagesNestedInput
 }
 
 export type chatmessagesUncheckedUpdateWithoutChatgroupsInput = {
@@ -792,7 +792,7 @@ export type $chatmessagesPayload<ExtArgs extends runtime.Types.Extensions.Intern
   name: "chatmessages"
   objects: {
     chatgroups: Prisma.$chatgroupsPayload<ExtArgs> | null
-    users: Prisma.$usersPayload<ExtArgs> | null
+    users: Prisma.$UsersPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1145,7 +1145,7 @@ readonly fields: chatmessagesFieldRefs;
 export interface Prisma__chatmessagesClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   chatgroups<T extends Prisma.chatmessages$chatgroupsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.chatmessages$chatgroupsArgs<ExtArgs>>): Prisma.Prisma__chatgroupsClient<runtime.Types.Result.GetResult<Prisma.$chatgroupsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  users<T extends Prisma.chatmessages$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.chatmessages$usersArgs<ExtArgs>>): Prisma.Prisma__usersClient<runtime.Types.Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  users<T extends Prisma.chatmessages$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.chatmessages$usersArgs<ExtArgs>>): Prisma.Prisma__UsersClient<runtime.Types.Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1555,18 +1555,18 @@ export type chatmessages$chatgroupsArgs<ExtArgs extends runtime.Types.Extensions
  */
 export type chatmessages$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the users
+   * Select specific fields to fetch from the Users
    */
-  select?: Prisma.usersSelect<ExtArgs> | null
+  select?: Prisma.UsersSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the users
+   * Omit specific fields from the Users
    */
-  omit?: Prisma.usersOmit<ExtArgs> | null
+  omit?: Prisma.UsersOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.usersInclude<ExtArgs> | null
-  where?: Prisma.usersWhereInput
+  include?: Prisma.UsersInclude<ExtArgs> | null
+  where?: Prisma.UsersWhereInput
 }
 
 /**

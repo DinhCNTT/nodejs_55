@@ -75,7 +75,7 @@ export type orders = Prisma.ordersModel
  */
 export type table_template = Prisma.table_templateModel
 /**
- * Model users
+ * Model Users
  * 
  */
-export type users = Prisma.usersModel
+export type Users = Prisma.UsersModel

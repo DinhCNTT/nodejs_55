@@ -20,7 +20,7 @@ model articles {
   deletedAt DateTime? @db.Timestamp(0)
   createdAt DateTime  @default(now()) @db.Timestamp(0)
   updatedAt DateTime  @default(now()) @db.Timestamp(0)
-  users     users?    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "articles_ibfk_1")
+  Users     Users?    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "articles_ibfk_1")
 
   @@index([userId], map: "userId")
 }
@@ -34,7 +34,7 @@ model chatgroupmembers {
   deletedAt   DateTime?   @db.Timestamp(0)
   createdAt   DateTime    @default(now()) @db.Timestamp(0)
   updatedAt   DateTime    @default(now()) @db.Timestamp(0)
-  users       users?      @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "chatgroupmembers_ibfk_1")
+  users       Users?      @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "chatgroupmembers_ibfk_1")
   chatgroups  chatgroups? @relation(fields: [chatGroupId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "chatgroupmembers_ibfk_2")
 
   @@index([chatGroupId], map: "chatGroupId")
@@ -51,7 +51,7 @@ model chatgroups {
   createdAt        DateTime           @default(now()) @db.Timestamp(0)
   updatedAt        DateTime           @default(now()) @db.Timestamp(0)
   chatgroupmembers chatgroupmembers[]
-  users            users?             @relation(fields: [ownerId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "chatgroups_ibfk_1")
+  users            Users?             @relation(fields: [ownerId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "chatgroups_ibfk_1")
   chatmessages     chatmessages[]
 
   @@index([ownerId], map: "ownerId")
@@ -68,7 +68,7 @@ model chatmessages {
   createdAt    DateTime    @default(now()) @db.Timestamp(0)
   updatedAt    DateTime    @default(now()) @db.Timestamp(0)
   chatgroups   chatgroups? @relation(fields: [chatGroupId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "chatmessages_ibfk_1")
-  users        users?      @relation(fields: [userIdSender], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "chatmessages_ibfk_2")
+  users        Users?      @relation(fields: [userIdSender], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "chatmessages_ibfk_2")
 
   @@index([chatGroupId], map: "chatGroupId")
   @@index([userIdSender], map: "userIdSender")
@@ -95,7 +95,7 @@ model orders {
   deletedAt DateTime? @db.Timestamp(0)
   createdAt DateTime  @default(now()) @db.Timestamp(0)
   updatedAt DateTime  @default(now()) @db.Timestamp(0)
-  users     users?    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "orders_ibfk_1")
+  users     Users?    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "orders_ibfk_1")
   foods     foods?    @relation(fields: [foodId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "orders_ibfk_2")
 
   @@index([foodId], map: "foodId")
@@ -111,7 +111,7 @@ model table_template {
   updatedAt DateTime  @default(now()) @db.Timestamp(0)
 }
 
-model users {
+model Users {
   id               Int                @id @default(autoincrement())
   email            String             @unique(map: "email") @db.VarChar(255)
   fullName         String?            @db.VarChar(255)
@@ -132,4 +132,6 @@ model users {
   chatgroups       chatgroups[]
   chatmessages     chatmessages[]
   orders           orders[]
+
+  @@map("users")
 }

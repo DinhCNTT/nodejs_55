@@ -5,6 +5,7 @@ import type { Response } from 'express';
 import { Public } from 'src/common/decorators/public.decorator';
 import { User } from 'src/common/decorators/user.decorator';
 import { Role } from 'src/common/decorators/role.decorator';
+import type { Request } from 'express';
 
 @Controller('auth') //định nghĩa route gốc cho controller này là /auth
 export class AuthController {
@@ -23,6 +24,12 @@ export class AuthController {
     ) {
         const result = await this.authService.login(body);
 
+        if (result.isTotp) {
+            return {
+                isTotp: true,
+            };
+        }
+
         res.cookie('accessToken', result.accessToken);
         res.cookie('refreshToken', result.refreshToken);
 
@@ -34,6 +41,20 @@ export class AuthController {
     @Get('get-info')
     getInfo(@User() user) {
         // console.log('req.user', user);
-        return user;
+        return {
+            ...user,
+            isTotp: !!user.totpSecret,
+        };
+    }
+
+    @Post('refresh-token')
+    @Public()
+    async refreshToken(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
+        const result = await this.authService.refreshToken(req);
+
+        res.cookie('accessToken', result.accessToken);
+        res.cookie('refreshToken', result.refreshToken);
+
+        return true;
     }
 }

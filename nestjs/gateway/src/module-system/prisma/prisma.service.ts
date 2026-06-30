@@ -15,6 +15,7 @@ export class PrismaService extends PrismaClient {
             host: url.hostname,
             port: Number(url.port),
             database: url.pathname.substring(1),
+            allowPublicKeyRetrieval: true,
         });
         super({ adapter });
     }

@@ -1,17 +1,30 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
-import { LoginDTO } from './DTO/login.dto.js';
-import { PrismaService } from '../../module-system/prisma/prisma.service.js';
+import {
+    BadRequestException,
+    Injectable,
+    UnauthorizedException,
+} from '@nestjs/common';
+import { PrismaService } from 'src/module-system/prisma/prisma.service';
 import bcrypt from 'bcrypt';
-import { TokenService } from '../../module-system/token/token.service.js';
+import { TokenService } from 'src/module-system/token/token.service';
+import { LoginDTO } from './DTO/login.dto';
+import type { Request } from 'express';
+import { ScureBase32Plugin, TOTP, NobleCryptoPlugin } from 'otplib';
+
 @Injectable() // đánh dấu là một provider
 export class AuthService {
+    private totp: TOTP;
     constructor(
         private prisma: PrismaService,
         private tokenService: TokenService,
-    ) { }
+    ) {
+        this.totp = new TOTP({
+            crypto: new NobleCryptoPlugin(),
+            base32: new ScureBase32Plugin(),
+        });
+    }
 
     async login(body: LoginDTO) {
-        console.log({ body });
+        // console.log({ body });
         const { email, password } = body;
         // console.log(email, password);
         //kiểm tra email xem có tồn tại không
@@ -34,7 +47,9 @@ export class AuthService {
         }
 
         if (!existingUser.password) {
-            throw new BadRequestException(`Vui lòng nhập đầy đủ thông tin hoặc vui lòng đăng ký thông tin lại`)
+            throw new BadRequestException(
+                `Vui lòng nhập đầy đủ thông tin hoặc vui lòng đăng ký lại`,
+            );
         }
 
         const isPasswordValid = bcrypt.compareSync(password, existingUser.password); //true
@@ -46,18 +61,85 @@ export class AuthService {
             );
         }
 
-        // tạo access token
-        // B1: tạo payload chứa thông tin: userId, email
+        // Kiểm tra xác thực 2 lớp (2FA)
+        if (existingUser.totpSecret) {
+            if (!body.token) {
+                return {
+                    accessToken: null,
+                    refreshToken: null,
+                    isTotp: true,
+                };
+            }
 
-        // B2: tạo access token từ payload
+            const isValid = await this.totp.verify(body.token, {
+                secret: existingUser.totpSecret,
+                epochTolerance: 30,
+            });
+
+            if (!isValid.valid) {
+                throw new BadRequestException('Mã xác thực 2FA không đúng hoặc đã hết hạn');
+            }
+        }
+
+        // tạo access token và refresh token
+        // tạo access token
         const accessToken = this.tokenService.createAccessToken(existingUser.id);
 
-        // tạo refresh token từ payload
+        // tạo refresh token
         const refreshToken = this.tokenService.createRefreshToken(existingUser.id);
 
         return {
             accessToken,
             refreshToken,
+            isTotp: null,
+        };
+    }
+
+    async refreshToken(req: Request) {
+        const { refreshToken, accessToken } = req.cookies;
+
+        if (!refreshToken) {
+            throw new UnauthorizedException(
+                'Refresh token không tồn tại, vui lòng đăng nhập lại',
+            );
+        }
+
+        if (!accessToken) {
+            throw new UnauthorizedException(
+                'Access token không tồn tại, vui lòng đăng nhập lại',
+            );
+        }
+
+        const decodeAccessToken = this.tokenService.verifyAccessToken(accessToken, {
+            ignoreExpiration: true,
+        });
+
+        const decodeRefreshToken =
+            this.tokenService.verifyRefreshToken(refreshToken);
+
+        if (decodeAccessToken.userId !== decodeRefreshToken.userId) {
+            throw new UnauthorizedException(
+                'Token không hợp lệ, vui lòng đăng nhập lại',
+            );
+        }
+
+        const userExist = await this.prisma.users.findUnique({
+            where: {
+                id: decodeAccessToken.userId,
+            },
+        });
+
+        if (!userExist) {
+            throw new UnauthorizedException(
+                'Người dùng không tồn tại, vui lòng đăng nhập lại',
+            );
+        }
+
+        const accessTokenNew = this.tokenService.createAccessToken(userExist.id);
+        // const refreshTokenNew = signRefreshToken(payload);
+        return {
+            accessToken: accessTokenNew,
+            refreshToken: refreshToken,
         };
     }
 }

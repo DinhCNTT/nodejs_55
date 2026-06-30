@@ -252,7 +252,7 @@ export type ordersWhereInput = {
   deletedAt?: Prisma.DateTimeNullableFilter<"orders"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"orders"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"orders"> | Date | string
-  users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.usersWhereInput> | null
+  users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.UsersWhereInput> | null
   foods?: Prisma.XOR<Prisma.FoodsNullableScalarRelationFilter, Prisma.foodsWhereInput> | null
 }
 
@@ -265,7 +265,7 @@ export type ordersOrderByWithRelationInput = {
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  users?: Prisma.usersOrderByWithRelationInput
+  users?: Prisma.UsersOrderByWithRelationInput
   foods?: Prisma.foodsOrderByWithRelationInput
 }
 
@@ -281,7 +281,7 @@ export type ordersWhereUniqueInput = Prisma.AtLeast<{
   deletedAt?: Prisma.DateTimeNullableFilter<"orders"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"orders"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"orders"> | Date | string
-  users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.usersWhereInput> | null
+  users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.UsersWhereInput> | null
   foods?: Prisma.XOR<Prisma.FoodsNullableScalarRelationFilter, Prisma.foodsWhereInput> | null
 }, "id">
 
@@ -321,7 +321,7 @@ export type ordersCreateInput = {
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.usersCreateNestedOneWithoutOrdersInput
+  users?: Prisma.UsersCreateNestedOneWithoutOrdersInput
   foods?: Prisma.foodsCreateNestedOneWithoutOrdersInput
 }
 
@@ -342,7 +342,7 @@ export type ordersUpdateInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.usersUpdateOneWithoutOrdersNestedInput
+  users?: Prisma.UsersUpdateOneWithoutOrdersNestedInput
   foods?: Prisma.foodsUpdateOneWithoutOrdersNestedInput
 }
 
@@ -534,7 +534,7 @@ export type ordersCreateWithoutFoodsInput = {
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.usersCreateNestedOneWithoutOrdersInput
+  users?: Prisma.UsersCreateNestedOneWithoutOrdersInput
 }
 
 export type ordersUncheckedCreateWithoutFoodsInput = {
@@ -648,7 +648,7 @@ export type ordersUpdateWithoutFoodsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.usersUpdateOneWithoutOrdersNestedInput
+  users?: Prisma.UsersUpdateOneWithoutOrdersNestedInput
 }
 
 export type ordersUncheckedUpdateWithoutFoodsInput = {
@@ -747,7 +747,7 @@ export type ordersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 export type $ordersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "orders"
   objects: {
-    users: Prisma.$usersPayload<ExtArgs> | null
+    users: Prisma.$UsersPayload<ExtArgs> | null
     foods: Prisma.$foodsPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1099,7 +1099,7 @@ readonly fields: ordersFieldRefs;
  */
 export interface Prisma__ordersClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  users<T extends Prisma.orders$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.orders$usersArgs<ExtArgs>>): Prisma.Prisma__usersClient<runtime.Types.Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  users<T extends Prisma.orders$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.orders$usersArgs<ExtArgs>>): Prisma.Prisma__UsersClient<runtime.Types.Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   foods<T extends Prisma.orders$foodsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.orders$foodsArgs<ExtArgs>>): Prisma.Prisma__foodsClient<runtime.Types.Result.GetResult<Prisma.$foodsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1490,18 +1490,18 @@ export type ordersDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
  */
 export type orders$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the users
+   * Select specific fields to fetch from the Users
    */
-  select?: Prisma.usersSelect<ExtArgs> | null
+  select?: Prisma.UsersSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the users
+   * Omit specific fields from the Users
    */
-  omit?: Prisma.usersOmit<ExtArgs> | null
+  omit?: Prisma.UsersOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.usersInclude<ExtArgs> | null
-  where?: Prisma.usersWhereInput
+  include?: Prisma.UsersInclude<ExtArgs> | null
+  where?: Prisma.UsersWhereInput
 }
 
 /**

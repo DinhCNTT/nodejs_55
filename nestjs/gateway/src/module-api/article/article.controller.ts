@@ -1,7 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Req } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Req,
+  UseInterceptors,
+} from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { UpdateArticleDto } from './dto/update-article.dto';
+import { CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
 
 @Controller('article')
 export class ArticleController {
@@ -13,6 +24,8 @@ export class ArticleController {
   }
 
   @Get()
+  @UseInterceptors(CacheInterceptor) // Sử dụng interceptor để tự động cache kết quả trả về của phương thức này
+  @CacheTTL(20000) // Thời gian cache là 20 giây (tính bằng giây)
   findAll(@Req() req) {
     return this.articleService.findAll(req);
   }
